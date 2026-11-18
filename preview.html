@@ -1,0 +1,368 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Python Attack 🐍</title>
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    background: #101a13;
+    color: #e6f5e7;
+    font-family: Arial, sans-serif;
+    overflow-x: hidden;
+    cursor: crosshair;
+}
+
+header {
+    text-align: center;
+    padding: 55px 20px;
+    background: #1d3825;
+}
+
+h1 { font-size: 45px; color: #a5ed9e; }
+
+main {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+}
+
+.card {
+    background: #1c2c21;
+    border: 1px solid #416a47;
+    border-radius: 15px;
+    padding: 25px;
+    margin-bottom: 20px;
+}
+
+h2 { color: #a5ed9e; }
+p { line-height: 1.7; }
+
+.hint {
+    color: #a5ed9e;
+    text-align: center;
+    font-size: 20px;
+}
+
+/* PYTHON */
+
+#attack {
+    position: fixed;
+    z-index: 9999;
+    pointer-events: none;
+    width: 280px;
+    height: 205px;
+    display: none;
+    transform-origin: center;
+}
+
+#attack svg {
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+}
+
+#attack.arrive {
+    display: block;
+    animation: arrive .42s cubic-bezier(.15,.8,.3,1) forwards;
+}
+
+@keyframes arrive {
+    from {
+        transform: translate(400px,-150px) rotate(-25deg) scale(.15);
+    }
+    to {
+        transform: translate(0,0) rotate(0) scale(1);
+    }
+}
+
+/* MÂCHOIRES */
+
+.upper, .lower {
+    transform-box: view-box;
+}
+
+.upper {
+    transform-origin: 135px 101px;
+    animation: openTop .3s ease-out forwards;
+}
+
+.lower {
+    transform-origin: 135px 104px;
+    animation: openBottom .3s ease-out forwards;
+}
+
+@keyframes openTop {
+    to { transform: rotate(-23deg); }
+}
+
+@keyframes openBottom {
+    to { transform: rotate(27deg); }
+}
+
+#attack.bite .upper {
+    animation: closeTop .16s ease-in forwards;
+}
+
+#attack.bite .lower {
+    animation: closeBottom .16s ease-in forwards;
+}
+
+@keyframes closeTop {
+    to { transform: rotate(0deg); }
+}
+
+@keyframes closeBottom {
+    to { transform: rotate(0deg); }
+}
+
+/* DOIGT */
+
+#finger {
+    position: fixed;
+    z-index: 10000;
+    pointer-events: none;
+    display: none;
+    font-size: 55px;
+    transform: translate(-50%,-50%);
+}
+
+#finger.show {
+    display: block;
+    animation: finger .35s ease-in-out forwards;
+}
+
+@keyframes finger {
+    to {
+        transform: translate(-50%,-50%) scale(.4) rotate(35deg);
+        opacity: .3;
+    }
+}
+
+#message {
+    position: fixed;
+    z-index: 10001;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #18271c;
+    border: 1px solid #8bdc8a;
+    border-radius: 12px;
+    padding: 14px 22px;
+    display: none;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+#message.show { display: block; }
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>🐍 PYTHON WORLD</h1>
+    <p>Bienvenue dans le monde des serpents...</p>
+</header>
+
+<main>
+    <div class="card">
+        <h2>Le python royal</h2>
+        <p>
+            Le python royal est un serpent constricteur originaire
+            d'Afrique. Il est généralement calme et discret.
+        </p>
+        <p>
+            Il possède une mâchoire impressionnante et peut avaler
+            des proies entières.
+        </p>
+    </div>
+
+    <div class="card">
+        <h2>Attention...</h2>
+        <p class="hint">👆 Clique n'importe où sur cette page.</p>
+        <p style="text-align:center">
+            Mais ne t'approche pas trop du python...
+        </p>
+    </div>
+
+    <div class="card">
+        <h2>Quelques faits</h2>
+        <p>📏 Taille : environ 1 à 1,5 mètre.</p>
+        <p>🌍 Origine : Afrique centrale et occidentale.</p>
+        <p>🍽️ Régime : carnivore.</p>
+        <p>🐍 Particularité : il peut s'enrouler en boule.</p>
+    </div>
+</main>
+
+<div id="message">🐍 LE PYTHON T'A ATTRAPÉ !</div>
+<div id="finger">👆</div>
+
+<div id="attack">
+<svg viewBox="0 0 280 205">
+
+    <!-- COU -->
+    <path d="M0 177 Q45 158 72 125 Q100 93 143 103"
+          fill="none" stroke="#496e2d"
+          stroke-width="48" stroke-linecap="round"/>
+
+    <path d="M0 177 Q45 158 72 125 Q100 93 143 103"
+          fill="none" stroke="#a9c65d"
+          stroke-width="27" stroke-linecap="round"/>
+
+    <!-- MOTIFS DU COU -->
+    <path d="M25 155 Q38 134 53 150
+             M60 132 Q74 109 91 125
+             M96 110 Q109 91 125 105"
+          fill="none" stroke="#d0ad56"
+          stroke-width="9" stroke-linecap="round"/>
+
+    <!-- CAVITÉ BUCCALE -->
+    <path d="M119 100 Q174 87 250 103
+             Q261 147 215 153
+             Q157 157 119 100Z"
+          fill="#47131c"/>
+
+    <!-- MÂCHOIRE SUPÉRIEURE -->
+    <g class="upper">
+
+        <path d="M112 103
+                 Q115 70 142 51
+                 Q176 26 219 48
+                 Q261 66 254 105
+                 Q186 115 112 103Z"
+              fill="#86a947"
+              stroke="#344e28"
+              stroke-width="3"/>
+
+        <!-- Motifs de peau -->
+        <path d="M143 66 Q159 40 182 54 L166 81Z"
+              fill="#d0ae57"/>
+        <path d="M187 48 Q217 39 238 69 L214 83Z"
+              fill="#d0ae57"/>
+
+        <!-- Œil gauche -->
+        <ellipse cx="176" cy="76" rx="12" ry="14"
+                 fill="#f3d45c"/>
+        <ellipse cx="178" cy="77" rx="4" ry="11"
+                 fill="#15170e"/>
+        <circle cx="179" cy="72" r="3" fill="white"/>
+
+        <!-- Œil droit -->
+        <ellipse cx="222" cy="76" rx="11" ry="13"
+                 fill="#f3d45c"/>
+        <ellipse cx="224" cy="77" rx="4" ry="10"
+                 fill="#15170e"/>
+        <circle cx="225" cy="72" r="3" fill="white"/>
+
+        <!-- Narines -->
+        <ellipse cx="244" cy="94" rx="3" ry="2"
+                 fill="#26351c"/>
+
+        <!-- Dents supérieures -->
+        <path d="
+            M142 104 L149 119 L156 105
+            L163 122 L171 106
+            L179 122 L187 107
+            L195 121 L203 106
+            L211 118 L219 104"
+            fill="#fff5df"
+            stroke="#c9c1a9"
+            stroke-width="1.2"/>
+    </g>
+
+    <!-- MÂCHOIRE INFÉRIEURE -->
+    <g class="lower">
+
+        <path d="M116 105
+                 Q166 117 254 103
+                 Q269 130 238 151
+                 Q190 174 148 143
+                 Q124 124 116 105Z"
+              fill="#719b40"
+              stroke="#344e28"
+              stroke-width="3"/>
+
+        <!-- Ventre -->
+        <path d="M148 137 Q195 161 240 131"
+              fill="none"
+              stroke="#c0d486"
+              stroke-width="8"
+              stroke-linecap="round"/>
+
+        <!-- Dents inférieures -->
+        <path d="
+            M144 112 L151 97 L158 114
+            L166 98 L174 115
+            L182 98 L190 114
+            L198 97 L206 112
+            L214 96 L222 109"
+            fill="#fff5df"
+            stroke="#c9c1a9"
+            stroke-width="1.2"/>
+
+    </g>
+
+</svg>
+</div>
+
+<script>
+const attack = document.getElementById("attack");
+const finger = document.getElementById("finger");
+const message = document.getElementById("message");
+
+let busy = false;
+
+document.addEventListener("click", (event) => {
+
+    if (busy) return;
+    busy = true;
+
+    const x = event.clientX;
+    const y = event.clientY;
+
+    finger.style.left = x + "px";
+    finger.style.top = y + "px";
+    finger.classList.remove("show");
+
+    attack.style.left = (x - 220) + "px";
+    attack.style.top = (y - 100) + "px";
+
+    attack.style.display = "none";
+    attack.classList.remove("arrive", "bite");
+
+    void attack.offsetWidth;
+
+    // Apparition du python
+    attack.style.display = "block";
+    attack.classList.add("arrive");
+
+    // Ouverture puis morsure
+    setTimeout(() => {
+        attack.classList.add("bite");
+        finger.classList.add("show");
+        message.classList.add("show");
+    }, 350);
+
+    // Disparition
+    setTimeout(() => {
+        attack.style.display = "none";
+        attack.classList.remove("arrive", "bite");
+
+        finger.classList.remove("show");
+        message.classList.remove("show");
+
+        busy = false;
+    }, 1150);
+
+});
+</script>
+
+</body>
+</html>
